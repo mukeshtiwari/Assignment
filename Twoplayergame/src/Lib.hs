@@ -29,6 +29,10 @@ type RandomByte = BS.ByteString
    1. It give opportunity to pass random number generated from any external source, 
       e.g. We can call some api from https://www.random.org, and pass it to 
       commitment function.  -}
+{- Security of hash based scheme hinges on two things:
+ 1. Collision Resistence of Hash function
+ 2. Length of Random byte 
+Explain more in doc -}
 generateCommitment :: RandomByte -> Card -> BS.ByteString
 generateCommitment rnd crd =  ret where
   ret = BS.pack . show . hashWith SHA512 . 

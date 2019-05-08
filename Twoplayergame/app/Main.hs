@@ -7,5 +7,5 @@ tossCoin = do
 
 main :: IO ()
 main = do
-  t <- tossCoin () -- Decide who goes first.
-   
+  t <- tossCoin -- Decide who goes first.
+  return ()   
