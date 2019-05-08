@@ -4,8 +4,6 @@ import Crypto.Hash
 import qualified Data.ByteString.Char8 as BS
 
 
-type RandomByte = BS.ByteString
-type Commitment = BS.ByteString
 
 {- Compute the commitment hash value of (random bytestring || card value).
    Publish the commitment. The reason for passing RandomBytes is because 
@@ -17,16 +15,16 @@ type Commitment = BS.ByteString
  2. Length of Random byte 
 Explain more in doc -}
 
-generateCommitment :: RandomByte -> Card -> BS.ByteString
-generateCommitment rnd crd =  ret where
-  ret = BS.pack . show . hashWith SHA512 . 
-        BS.append rnd $ (BS.pack . show $ crd)
+generateCommitment :: Rand -> Card -> Commitment
+generateCommitment (RByte rnd) crd =  ret where
+  ret = CByte (BS.pack . show . hashWith SHA256 . 
+               BS.append rnd $ (BS.pack . show $ crd))
 
 {- This function verifies the claim.
    hash (rnd || card) == commitment -}
-verifyCommitment :: RandomByte -> Card -> Commitment -> Bool
-verifyCommitment rnd crd commit = 
-  commit == (BS.pack . show . hashWith SHA512 . 
+verifyCommitment :: Rand -> Card -> Commitment -> Bool
+verifyCommitment (RByte rnd) crd (CByte commit) = 
+  commit == (BS.pack . show . hashWith SHA256 . 
              BS.append rnd $ (BS.pack . show $ crd))     
 
 
