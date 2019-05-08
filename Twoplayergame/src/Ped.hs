@@ -1,49 +1,23 @@
 module Ped where
 import Datatype
 import Crypto.Number.ModArithmetic
-import qualified Data.ByteString.Char8 as BS
-import qualified Data.List as List
-import System.Random
+import Pedpubparameter
 
-{- This file is implementation of Pedersen's commitment scheme -}
-{- https://en.wikipedia.org/wiki/Schnorr_group -}
-{- I have taken these two primes from IACR election conducted on Helios. The reason for choosing these two primes were: 1. I have proved them coq that they are prime. 
-  2. It's ongoing work for my new paper I am planning to submit to CCS -}
-p :: Integer
-p =  16328632084933010002384055033805457329601614771185955389739167309086214800406465799038583634953752941675645562182498120750264980492381375579367675648771293800310370964745767014243638518442553823973482995267304044326777047662957480269391322789378384619428596446446984694306187644767462460965622580087564339212631775817895958409016676398975671266179637898557687317076177218843233150695157881061257053019133078545928983562221396313169622475509818442661047018436264806901023966236718367204710755935899013750306107738002364137917426595737403871114187750804346564731250609196846638183903982387884578266136503697493474682071
-
-q :: Integer
-q =  61329566248342901292543872769978950870633559608669337131139375508370458778917
-
-r :: Integer
-r = div (p - 1) q
-
-generateGroup :: Integer
-generateGroup = List.head . filter (\h -> expFast h r p /= 1) $ [2 .. (p - 1)]
-
-g :: Integer
-g = 2
-
-{- 
-h :: IO Integer
-h = do 
-  w <- randomRIO (2, p - 3)
-  return (expFast g w p) -}
-
-h :: Integer
-h = 260299880322376099867086818336200760696268091962132572640880575316093166205364624474168778439509561088596341538097562532411704177068540818649548852191656677320098785872401365364794753786931344976651392791554960717569775799670897988472293814570865797565894046938525273961030777439937520765376226292488945007465034196704188370881312604841888789498484761114078738569336731500827911755588798610960210543664809620141254487738302472120046114289390806566393020204552392783034391190295597458058358987358979660704223380045805111646005530940407286612647661981997788715151773702169485915818637126606936384168154931884011524337
-{- Now I have all the infrastructure -}
+{- This file implements Pedersen's commitment scheme -}
 
 type RInt = Integer {- It could have been better if it were dependent product type. {x : Integer | In x Zq} -}
 type Commitment = Integer
 
+{- Generate commitment.  g^m * h ^ r -}
 generateCommitment :: RInt -> Card -> Commitment
 generateCommitment rnd crd =  ret where
   ret = mod ((expFast g (toInteger . fromEnum $ crd) p) *
              (expFast h rnd p)) p  
 
 
-{- This function verifies the claim -}
+{- This function verifies the claim. 
+   Reveal randomenss and card => g^(toEnum card) * h ^ randomness == commitment
+-}
 verifyCommitment :: RInt -> Card -> Commitment -> Bool
 verifyCommitment rnd crd commit = 
   commit == mod ((expFast g (toInteger . fromEnum $ crd) p) *  
