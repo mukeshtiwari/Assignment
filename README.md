@@ -18,7 +18,7 @@ In HMAC based solution (Ped.hs file), I have defined two functions.
    
 The security of this whole scheme hinges on length of byte and collision resistence of hash function. If the lenght of bytes used are small 
 then adversary
-can brute froce all the possible bits (2 ^ n where n is length of byte) and 
+can brute force all the possible bits (2 ^ n where n is length of byte) and 
 combine it with all possible cards to produce the matching commitment. Similarly,  if hash function is not collision resistant, then he can 
 produce same commitment with different values of random bytes and card.
 
@@ -38,7 +38,7 @@ verifyCommitment (RByte rnd) crd (CByte commit) =
 
 ```
 
-In principal, the high level ides of Pedersen's commitment scheme 
+In Pedersen's commitment scheme, the high level idea
 is same as HMAC, but the underlying implementation uses 
 discrete logarithm (Ped.hs). 
 
