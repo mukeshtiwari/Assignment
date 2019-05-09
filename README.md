@@ -285,4 +285,9 @@ Bob => Alice: I won the game. Good luck next time.
 I believe the language perfect for this problem is Rust sprinkled with
 [separation logic](http://plv.mpi-sws.org/rustbelt/), but I don't know 
 Rust in much depth, so I went with Haskell. Haskell is excellent lanague, but
-in my personal opinion, laziness is not promising situation for cryptographic application. Well, Rust is next language in my to-do list.
+in my personal opinion, laziness is not promising situation for cryptographic application. Well, Rust is next language in my to-do list. Please, let me 
+know if you have any question. 
+
+
+Best regards,<br> 
+Mukesh Tiwari
