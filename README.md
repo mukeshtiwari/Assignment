@@ -282,6 +282,8 @@ Queen
 Bob => Alice: I won the game. Good luck next time.
 ```
 
+
+
 I believe the language perfect for this problem is Rust sprinkled with 
 [separation logic](http://plv.mpi-sws.org/rustbelt/), but I don't know 
 Rust in much depth, so I went with Haskell. Haskell is excellent lanague, but 
