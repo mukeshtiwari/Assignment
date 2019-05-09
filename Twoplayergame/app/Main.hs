@@ -17,7 +17,10 @@ size = 2048
 readCard :: String -> Card
 readCard s = read  s
 
+
 {-
+-- Uncomment this code and comment the below one if you want to run
+-- hash based verification.
 -- Game sequence which uses Hash based mechanism. 
 -- It calls function from library Lib.hs
 gameMove :: Player -> IO (Card, Rand, Commitment)
@@ -38,7 +41,8 @@ verificationPhase p1 p2 rnd comm =  do
   str <- System.IO.getLine
   let card = readCard str
   return (Lib.verifyCommitment rnd card comm)
---}
+
+-}
 
 -- Game sequence which uses discrete logarithm (Pedersen commitments).
 -- It calls function from library Ped.hs
@@ -61,7 +65,6 @@ verificationPhase p1 p2 rnd comm =  do
   str <- System.IO.getLine
   let card = readCard str
   return (Ped.verifyCommitment rnd card comm)
-
 
 
 main :: IO ()
