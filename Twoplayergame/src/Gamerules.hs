@@ -1,4 +1,4 @@
-module Gamelogic where
+module Gamerules where
 import Datatype
 
 
