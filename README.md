@@ -221,9 +221,9 @@ random interger (if you are running Pedersen's commitment) or random byte
 (hash version). Next, it prompts ```Bob on move:``` and waits for his input. 
 It produces the similar message like it produced for Alice. After Bob's move,
  the program enters into verification phase. In verification phase, 
- Bob asks Alice about her card by displaying the message 
- ``` Bob: what 
- was your card Alice?(Message to user: Try to cheat here)```. At this point, 
+ Bob asks Alice about her card by displaying the message ``` Bob: what 
+ was your card Alice?(Message to user: Try to cheat here)```. 
+ At this point, 
  program waits for Alice to give her card from standard input. The reason 
  for choosing the standard input is, giving Alice opportunity to cheat. She 
  can change her mind and give a different than what she committed. If she
