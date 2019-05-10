@@ -6,7 +6,7 @@ used two methods:
 1. Hash based scheme (HMAC)
 2. Discrete logarithm (Pedersen's Commitment)
 
-In HMAC based solution (Ped.hs file), I have defined two functions. 
+In HMAC based solution (Lib.hs file), I have defined two functions. 
 
 1. ```generateCommitment``` which generates commitment (blob) by taking a 
    random bytes and card as input and returns SHA256 hash of random 
